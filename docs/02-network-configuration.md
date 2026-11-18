@@ -8,7 +8,7 @@ Configure the Proxmox host to use a Linux bridge connected to the physical Ether
 
 ```text
 Home router
-192.168.1.254
+<gateway-ip>
       |
       | Ethernet
       |
@@ -17,7 +17,7 @@ Home router
    vmbr0 (Linux bridge)
       |
 Proxmox host
-192.168.1.159/24 (observed)
+<host-ip>/<prefix>
 ```
 
 `vmbr0` is the bridge used by the Proxmox host. Virtual machines can later connect to this bridge to reach the physical LAN, subject to the network and VM configuration.
@@ -79,8 +79,8 @@ ip route
 The observed result was:
 
 ```text
-default via 192.168.1.254 dev vmbr0
-192.168.1.0/24 dev vmbr0 proto kernel scope link src 192.168.1.159
+default via <gateway-ip> dev vmbr0
+<lan-subnet> dev vmbr0 proto kernel scope link src <host-ip>
 ```
 
 This confirmed that the host had a default route through the home router at that time.
@@ -90,7 +90,7 @@ This confirmed that the host had a default route through the home router at that
 The following tests were used or recommended:
 
 ```bash
-ping -c 4 192.168.1.254
+ping -c 4 <gateway-ip>
 ping -c 4 1.1.1.1
 ping -c 4 google.com
 ```
@@ -113,6 +113,6 @@ Before marking this complete:
 2. Ensure you have local console access before testing, in case remote management connectivity is interrupted.
 3. Reboot during a convenient maintenance window.
 4. After reboot, run `ip -br addr` and `ip route`.
-5. Confirm that the host has the expected address and a default route through `192.168.1.254`.
+5. Confirm that the host has the expected address and a default route through the expected LAN gateway.
 
 For a stable home-lab management address, consider a DHCP reservation on the router or a carefully planned static address outside the router's dynamic pool. Avoid assigning an address that could conflict with another device.
