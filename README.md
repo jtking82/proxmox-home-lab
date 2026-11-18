@@ -27,9 +27,9 @@ The goal of this repository is to show practical infrastructure skills through r
 | Management bridge | `vmbr0` |
 | Physical Ethernet interface | `nic0` |
 | Bridge addressing | DHCP |
-| Host IPv4 address observed | `192.168.1.159/24` |
-| Default gateway observed | `192.168.1.254` |
-| LAN subnet | `192.168.1.0/24` |
+| Host IPv4 address | Redacted from public documentation |
+| Default gateway | Redacted from public documentation |
+| LAN subnet | Redacted from public documentation |
 | Management interface | Proxmox web UI, TCP port `8006` |
 
 The address above is the address observed during configuration. If DHCP is still in use, it may change unless a reservation or static address is configured.
@@ -48,7 +48,8 @@ proxmox-home-lab/
 │   └── 05-next-steps.md
 ├── evidence/
 │   ├── README.md
-│   └── command-output-template.md
+│   ├── command-output-template.md
+│   └── initial-validation.md
 └── scripts/
     └── collect-host-info.sh
 ```
@@ -61,15 +62,11 @@ proxmox-home-lab/
 - [Validation and troubleshooting](docs/04-validation-and-troubleshooting.md)
 - [Next steps](docs/05-next-steps.md)
 - [Evidence guidance](evidence/README.md)
+- [Sanitized initial validation record](evidence/initial-validation.md)
 
 ## Key troubleshooting example: default route
 
-During network configuration, the host had an address on the LAN but initially did not show a default route. The route table later showed:
-
-```text
-default via 192.168.1.254 dev vmbr0
-192.168.1.0/24 dev vmbr0 proto kernel scope link src 192.168.1.159
-```
+During network configuration, the host had an address on the LAN but initially did not show a default route. The route table later showed a default route through the LAN gateway and a connected route for the host's local subnet. Exact home-network addresses are intentionally omitted from this public repository. A sanitized example is provided in [initial validation evidence](evidence/initial-validation.md).
 
 This demonstrates an important troubleshooting distinction:
 
