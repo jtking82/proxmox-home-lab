@@ -38,11 +38,7 @@ Proxmox is managed through a web browser from another computer on the network:
 https://<proxmox-host-ip>:8006
 ```
 
-For this lab, the host address observed during setup was `192.168.1.159`, so the corresponding URL was:
-
-```text
-https://192.168.1.159:8006
-```
+The actual management address is intentionally omitted from this public guide. From a trusted computer on the same management network, open `https://<proxmox-host-ip>:8006` using the address assigned to your host.
 
 The browser may warn that the certificate is not trusted because a default/self-signed certificate is commonly used in a new lab installation. Confirm that the address is the intended local Proxmox host before proceeding.
 
