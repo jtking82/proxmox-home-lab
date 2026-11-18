@@ -12,9 +12,9 @@ A host can communicate with devices on its directly connected subnet while still
 
 | Item | Value |
 |---|---|
-| LAN subnet | `192.168.1.0/24` |
-| Router/default gateway | `192.168.1.254` |
-| Proxmox address observed | `192.168.1.159/24` |
+| LAN subnet | Redacted |
+| Router/default gateway | Redacted |
+| Proxmox address observed | Redacted |
 | Proxmox bridge | `vmbr0` |
 
 ## Diagnostic commands
@@ -28,7 +28,7 @@ cat /etc/network/interfaces
 The key distinction in the route table was the presence or absence of a line similar to:
 
 ```text
-default via 192.168.1.254 dev vmbr0
+default via <gateway-ip> dev vmbr0
 ```
 
 ## Resolution status
@@ -42,8 +42,8 @@ ifreload -a
 the route table showed:
 
 ```text
-default via 192.168.1.254 dev vmbr0
-192.168.1.0/24 dev vmbr0 proto kernel scope link src 192.168.1.159
+default via <gateway-ip> dev vmbr0
+<lan-subnet> dev vmbr0 proto kernel scope link src <host-ip>
 ```
 
 The user confirmed that connectivity was working.
