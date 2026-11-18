@@ -17,4 +17,4 @@ Before committing evidence, review it for:
 - MAC addresses or serial numbers you do not want public
 - Internal hostnames or network details you prefer to keep private
 
-A home-lab private subnet is often useful evidence, but you are not required to publish every infrastructure detail. Redact anything you are uncomfortable sharing.
+Do not publish your actual home subnet, gateway, or device addresses unless you have deliberately decided to make them public. Use placeholders such as `<host-ip>` and `<gateway-ip>`, or clearly labeled documentation-only example addresses. The `initial-validation.md` file uses documentation-only example values, not the actual home-network addresses.
