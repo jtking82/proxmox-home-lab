@@ -4,7 +4,7 @@
 
 Provision a minimal Debian server as the first guest on the Proxmox hypervisor, establish remote administration over SSH, and enable communication between the guest and Proxmox using the QEMU Guest Agent.
 
-This is a home-lab exercise. It demonstrates VM provisioning and Linux administration; it does not by itself demonstrate production data-center operations.
+This is a home-lab exercise focused on practical infrastructure skills. It demonstrates VM provisioning and Linux administration while providing a record of independent learning, troubleshooting, and verification.
 
 ## Guest configuration
 
@@ -161,4 +161,4 @@ Not yet completed:
 
 ## Home-lab limitations
 
-This exercise uses a single home hypervisor and a single guest. It does not demonstrate redundant infrastructure, enterprise change control, production incident response, hardware replacement, or data-center physical operations. It does provide repeatable practice with virtualization, Linux administration, remote access, and systematic troubleshooting.
+This exercise uses a single home hypervisor and a single guest. It does not demonstrate redundant infrastructure, enterprise change control, production incident response, or physical hardware replacement procedures. It does provide repeatable practice with virtualization, Linux administration, remote access, systematic troubleshooting, and documenting technical work.
