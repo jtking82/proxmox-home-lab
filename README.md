@@ -2,7 +2,7 @@
 
 A documented home-lab project demonstrating the installation and initial configuration of **Proxmox VE 9.2.2**, followed by deployment of a Debian virtual machine.
 
-The goal of this repository is to show practical infrastructure skills through repeatable documentation, command-line evidence, troubleshooting notes, and incremental lab expansion.
+The goal of this repository is to show practical infrastructure skills through repeatable documentation, command-line evidence, troubleshooting notes, and incremental lab expansion. It also demonstrates self-directed learning, initiative, resourcefulness, and the ability to investigate problems, verify results, and communicate technical work clearly.
 
 > **Project status:** Proxmox VE is installed and its wired network is working. The first Debian 13 virtual machine is installed, reachable over SSH, and integrated with Proxmox through the QEMU Guest Agent. Docker and application services are planned next steps and are not yet claimed as completed.
 
@@ -123,4 +123,4 @@ See [APT repository configuration](docs/03-apt-repositories.md).
 
 ## Why this project matters
 
-This repository records hands-on work with a real hypervisor host and a virtual Linux server. It is intended as a learning log and a practical portfolio artifact—not as a claim of production data-center experience. Each milestone documents what was configured, how it was verified, what troubleshooting was required, and what remains to be tested.
+This repository records hands-on work with a real hypervisor host and a virtual Linux server. It is intended as a practical learning log and portfolio artifact that demonstrates initiative, resourcefulness, systematic troubleshooting, and clear technical documentation. Each milestone documents what was configured, how it was verified, what troubleshooting was required, and what remains to be tested.
