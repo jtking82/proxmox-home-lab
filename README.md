@@ -112,7 +112,7 @@ See [APT repository configuration](docs/03-apt-repositories.md).
 - [x] APT repositories configured
 - [x] APT metadata update completed successfully
 - [x] First Debian 13 virtual machine created and installed
-- [x] Debian guest attached to `vmbr0)
+- [x] Debian guest attached to `vmbr0`
 - [x] SSH access from a second computer verified
 - [x] QEMU Guest Agent virtual device exposed and service verified running
 - [ ] Verify host network configuration after a controlled reboot
