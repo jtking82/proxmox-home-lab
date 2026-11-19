@@ -24,6 +24,12 @@ The goal of this repository is to show practical infrastructure skills through r
 - Using Docker Compose / Portainer Stacks
 - Configuring persistent Docker volumes and published ports
 - Deploying Uptime Kuma and configuring infrastructure monitors
+- Inspecting Docker containers, images, volumes, and networks
+- Reading container logs and using them to investigate monitoring failures
+- Understanding Docker bridge networking and container-to-host port publishing
+- Practicing container lifecycle management with a controlled restart
+- Verifying persistent application data after a container restart
+- Reading and explaining an existing Docker Compose configuration
 - Troubleshooting DNS, container connectivity, and incorrect monitoring targets
 - Verifying service state and documenting results
 
@@ -63,7 +69,8 @@ proxmox-home-lab/
 │   ├── 04-validation-and-troubleshooting.md
 │   ├── 05-next-steps.md
 │   ├── 06-first-debian-vm.md
-│   └── 07-docker-portainer-and-monitoring.md
+│   ├── 07-docker-portainer-and-monitoring.md
+│   └── 08-docker-administration-and-compose.md
 ├── evidence/
 │   ├── README.md
 │   ├── command-output-template.md
@@ -81,6 +88,7 @@ proxmox-home-lab/
 - [Next steps](docs/05-next-steps.md)
 - [First Debian virtual machine](docs/06-first-debian-vm.md)
 - [Docker, Portainer, and monitoring deployment](docs/07-docker-portainer-and-monitoring.md)
+- [Docker administration and Compose fundamentals](docs/08-docker-administration-and-compose.md)
 - [Evidence guidance](evidence/README.md)
 - [Sanitized initial validation record](evidence/initial-validation.md)
 
@@ -142,6 +150,14 @@ See [APT repository configuration](docs/03-apt-repositories.md).
 - [x] Uptime Kuma deployed with persistent storage
 - [x] Monitoring configured for the Proxmox host, Debian guest, and Portainer
 - [x] All three Uptime Kuma monitors verified UP
+- [x] Inspected Docker containers, images, volumes, and networks
+- [x] Reviewed Uptime Kuma logs and diagnosed an incorrect monitor target
+- [x] Verified Uptime Kuma's persistent volume mount
+- [x] Restarted Uptime Kuma and verified it returned healthy
+- [x] Confirmed all three monitors remained configured and UP after restart
+- [x] Reviewed the deployed Portainer Stack Compose configuration
+- [ ] Practice a safe command-line Compose workflow for the existing stack
+- [ ] Back up and restore the Uptime Kuma persistent volume
 - [ ] Verify host network configuration after a controlled reboot
 - [ ] Verify guest network configuration after a controlled reboot
 - [ ] Add additional useful services
