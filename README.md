@@ -4,7 +4,7 @@ A documented home-lab project demonstrating the installation and initial configu
 
 The goal of this repository is to show practical infrastructure skills through repeatable documentation, command-line evidence, troubleshooting notes, and incremental lab expansion. It also demonstrates self-directed learning, initiative, resourcefulness, and the ability to investigate problems, verify results, and communicate technical work clearly.
 
-> **Project status:** Proxmox VE is installed and its wired network is working. A Debian 13 virtual machine is installed, reachable over SSH, and integrated with Proxmox through the QEMU Guest Agent. Docker Engine and Docker Compose are installed. Portainer Community Edition is deployed for container management, and Uptime Kuma is monitoring the Proxmox host, Debian guest, and Portainer endpoint. All three monitors were verified UP.
+> **Project status:** Proxmox VE is installed and its wired network is working. A Debian 13 virtual machine is installed, reachable over SSH, and integrated with Proxmox through the QEMU Guest Agent. Docker Engine and Docker Compose are installed. Portainer Community Edition is deployed for container management, and Uptime Kuma is monitoring the Proxmox host, Debian guest, and Portainer endpoint. Pi-hole is now deployed for DNS filtering and DHCP. DNS blocking has been verified with direct queries, and a test phone has received a Pi-hole DHCP lease and generated queries visible in the Pi-hole Query Log. DNS verification for a second client remains in progress.
 
 ## Skills demonstrated
 
@@ -31,6 +31,13 @@ The goal of this repository is to show practical infrastructure skills through r
 - Verifying persistent application data after a container restart
 - Reading and explaining an existing Docker Compose configuration
 - Troubleshooting DNS, container connectivity, and incorrect monitoring targets
+- Configuring a stable IPv4 address with NetworkManager
+- Deploying Pi-hole in Docker using host networking
+- Configuring upstream DNS resolvers and persistent application data
+- Testing DNS resolution and domain blocking with `nslookup`
+- Configuring DHCP service and verifying the DHCP listener on UDP port 67
+- Coordinating a DHCP handoff from a router to a self-hosted service
+- Verifying client DHCP leases and DNS activity in Pi-hole
 - Verifying service state and documenting results
 
 ## Environment
@@ -47,12 +54,13 @@ The goal of this repository is to show practical infrastructure skills through r
 | First guest | Debian GNU/Linux 13 (Trixie), VM ID 101 |
 | Guest hostname | `debian-services` |
 | Guest resources | 2 vCPU, 2 GiB RAM, 32 GiB virtual disk |
-| Guest networking | VirtIO network adapter attached to `vmbr0`; DHCP |
+| Guest networking | VirtIO network adapter attached to `vmbr0`; stable IPv4 configuration |
 | Remote administration | SSH |
 | Proxmox integration | QEMU Guest Agent running |
 | Container runtime | Docker Engine, Docker Compose plugin |
 | Container management | Portainer Community Edition |
 | Monitoring | Uptime Kuma with SQLite |
+| DNS filtering / DHCP | Pi-hole FTL |
 
 Actual home-network addresses, account names, and other identifying details are intentionally omitted from this public documentation.
 
@@ -70,7 +78,8 @@ proxmox-home-lab/
 │   ├── 05-next-steps.md
 │   ├── 06-first-debian-vm.md
 │   ├── 07-docker-portainer-and-monitoring.md
-│   └── 08-docker-administration-and-compose.md
+│   ├── 08-docker-administration-and-compose.md
+│   └── 09-pihole-dns-and-dhcp.md
 ├── evidence/
 │   ├── README.md
 │   ├── command-output-template.md
@@ -89,6 +98,7 @@ proxmox-home-lab/
 - [First Debian virtual machine](docs/06-first-debian-vm.md)
 - [Docker, Portainer, and monitoring deployment](docs/07-docker-portainer-and-monitoring.md)
 - [Docker administration and Compose fundamentals](docs/08-docker-administration-and-compose.md)
+- [Pi-hole DNS filtering and DHCP deployment](docs/09-pihole-dns-and-dhcp.md)
 - [Evidence guidance](evidence/README.md)
 - [Sanitized initial validation record](evidence/initial-validation.md)
 
@@ -114,6 +124,12 @@ The first `hello-world` image pull failed while resolving Docker's CloudFront do
 
 The Debian host monitor initially remained pending because its configured target address was incorrect. Correcting the target to the Debian VM's actual LAN address resolved the issue. This reinforced the importance of verifying monitor targets before changing host networking or firewall settings.
 
+### Pi-hole DNS and DHCP deployment
+
+Pi-hole was deployed in the Debian services VM using Docker Compose and host networking. DNS filtering was verified with direct queries: a normal domain resolved successfully, while a known advertising/tracking domain returned sinkhole addresses. The Debian guest was assigned a stable IPv4 configuration, and Pi-hole's DHCP listener was verified on UDP port 67.
+
+The router's DHCP service was disabled before Pi-hole DHCP was enabled. A test phone received a lease from Pi-hole and generated DNS requests visible in the Query Log. A second client received a lease but its DNS activity was not yet visible during the initial test; that verification remains open. See [Pi-hole DNS filtering and DHCP deployment](docs/09-pihole-dns-and-dhcp.md).
+
 ## Repository configuration
 
 The Proxmox host was configured to use the Proxmox `pve-no-subscription` repository and Debian Trixie repositories. The enterprise Proxmox repository was disabled. An APT metadata update completed successfully.
@@ -129,6 +145,8 @@ See [APT repository configuration](docs/03-apt-repositories.md).
 - Use strong unique passwords and keep the host and guests updated.
 - Review screenshots and command output before committing them.
 - Use SSH keys for routine administration when key-based access has been configured and tested.
+- Keep only one DHCP server active on a LAN broadcast domain.
+- Keep Pi-hole's administrative interface restricted to trusted users and the private network.
 
 ## Current completion checklist
 
@@ -156,11 +174,21 @@ See [APT repository configuration](docs/03-apt-repositories.md).
 - [x] Restarted Uptime Kuma and verified it returned healthy
 - [x] Confirmed all three monitors remained configured and UP after restart
 - [x] Reviewed the deployed Portainer Stack Compose configuration
+- [x] Configured a stable IPv4 address for the Debian services VM
+- [x] Deployed Pi-hole with Docker Compose and persistent configuration
+- [x] Verified normal DNS resolution through Pi-hole
+- [x] Verified a known advertising/tracking domain was blocked
+- [x] Added the Docker capability required for Pi-hole DHCP
+- [x] Verified Pi-hole FTL listening on UDP port 67
+- [x] Disabled router DHCP before enabling Pi-hole DHCP
+- [x] Verified a test phone received a Pi-hole DHCP lease and generated DNS queries
+- [x] Verified a second client received a DHCP lease from Pi-hole
+- [ ] Confirm DNS queries from the second client appear in Pi-hole Query Log
+- [ ] Verify additional clients use Pi-hole for DNS
+- [ ] Review IPv6 DNS behavior
 - [ ] Practice a safe command-line Compose workflow for the existing stack
-- [ ] Back up and restore the Uptime Kuma persistent volume
-- [ ] Verify host network configuration after a controlled reboot
-- [ ] Verify guest network configuration after a controlled reboot
-- [ ] Add additional useful services
+- [ ] Back up and restore persistent application volumes
+- [ ] Verify host and guest network configuration after a controlled reboot
 - [ ] Add backup and restore exercises
 
 ## Why this project matters
