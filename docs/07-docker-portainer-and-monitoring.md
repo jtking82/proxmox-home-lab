@@ -197,10 +197,12 @@ Three monitors were configured in Uptime Kuma:
 | Debian Services | Ping | `<DEBIAN_VM_IP>` |
 | Proxmox Host | Ping | `<PROXMOX_HOST_IP>` |
 | Portainer | HTTP(s) | `https://<DEBIAN_VM_IP>:9443` |
+| Pi-hole Web Interface | HTTP(s) | `http://<DEBIAN_VM_IP>:8081/admin/` |
+| Pi-hole DNS Port | TCP Port | `<DEBIAN_VM_IP>:53` |
 
 The Portainer HTTPS monitor may require the **Ignore TLS/SSL error** option when using the initial self-signed certificate.
 
-All three monitors were observed in the **UP** state after correcting the Debian monitor's target address.
+The original three monitors were observed in the **UP** state after correcting the Debian monitor's target address. Pi-hole web and DNS-port checks were subsequently added and verified UP; see [Headless host operation and Pi-hole monitoring](10-headless-host-and-pihole-monitoring.md).
 
 ### Troubleshooting: Debian monitor remained pending
 
@@ -271,7 +273,8 @@ df -h /
 - [x] SQLite selected for Uptime Kuma
 - [x] Persistent storage configured for Uptime Kuma
 - [x] Debian, Proxmox, and Portainer monitors configured
-- [x] All three monitors verified UP
+- [x] Original Debian, Proxmox, and Portainer monitors verified UP
+- [x] Pi-hole web-interface and DNS-port monitors added and verified UP
 
 ### Next steps
 
