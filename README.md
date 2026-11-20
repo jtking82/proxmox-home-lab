@@ -4,7 +4,7 @@ A documented home-lab project demonstrating the installation and initial configu
 
 The goal of this repository is to show practical infrastructure skills through repeatable documentation, command-line evidence, troubleshooting notes, and incremental lab expansion. It also demonstrates self-directed learning, initiative, resourcefulness, and the ability to investigate problems, verify results, and communicate technical work clearly.
 
-> **Project status:** Proxmox VE is installed and its wired network is working. A Debian 13 virtual machine is installed, reachable over SSH, and integrated with Proxmox through the QEMU Guest Agent. Docker Engine and Docker Compose are installed. Portainer Community Edition is deployed for container management, and Uptime Kuma is monitoring the Proxmox host, Debian guest, and Portainer endpoint. Pi-hole is now deployed for DNS filtering and DHCP. DNS blocking has been verified with direct queries, and a test phone has received a Pi-hole DHCP lease and generated queries visible in the Pi-hole Query Log. DNS verification for a second client remains in progress.
+> **Project status:** Proxmox VE is installed and its wired network is working. A Debian 13 virtual machine is installed, reachable over SSH, and integrated with Proxmox through the QEMU Guest Agent. Docker Engine and Docker Compose are installed. Portainer Community Edition is deployed for container management, and Uptime Kuma is monitoring the Proxmox host, Debian guest, and Portainer endpoint. Pi-hole is now deployed for DNS filtering and DHCP. DNS blocking has been verified with direct queries, and a test phone has received a Pi-hole DHCP lease and generated queries visible in the Pi-hole Query Log. DNS verification for a second client remains in progress. Pi-hole web and DNS-port availability checks have also been added to Uptime Kuma.
 
 ## Skills demonstrated
 
@@ -39,6 +39,10 @@ The goal of this repository is to show practical infrastructure skills through r
 - Coordinating a DHCP handoff from a router to a self-hosted service
 - Verifying client DHCP leases and DNS activity in Pi-hole
 - Verifying service state and documenting results
+- Configuring systemd-logind to ignore lid-close events on a laptop-based Proxmox host
+- Testing headless host operation and VM reachability with the lid closed
+- Monitoring Pi-hole web-interface and DNS-port availability with Uptime Kuma
+- Troubleshooting monitor targets and correcting a web-monitor port mismatch
 
 ## Environment
 
@@ -79,7 +83,8 @@ proxmox-home-lab/
 │   ├── 06-first-debian-vm.md
 │   ├── 07-docker-portainer-and-monitoring.md
 │   ├── 08-docker-administration-and-compose.md
-│   └── 09-pihole-dns-and-dhcp.md
+│   ├── 09-pihole-dns-and-dhcp.md
+│   └── 10-headless-host-and-pihole-monitoring.md
 ├── evidence/
 │   ├── README.md
 │   ├── command-output-template.md
@@ -99,6 +104,7 @@ proxmox-home-lab/
 - [Docker, Portainer, and monitoring deployment](docs/07-docker-portainer-and-monitoring.md)
 - [Docker administration and Compose fundamentals](docs/08-docker-administration-and-compose.md)
 - [Pi-hole DNS filtering and DHCP deployment](docs/09-pihole-dns-and-dhcp.md)
+- [Headless host operation and Pi-hole monitoring](docs/10-headless-host-and-pihole-monitoring.md)
 - [Evidence guidance](evidence/README.md)
 - [Sanitized initial validation record](evidence/initial-validation.md)
 
@@ -188,6 +194,8 @@ See [APT repository configuration](docs/03-apt-repositories.md).
 - [ ] Review IPv6 DNS behavior
 - [ ] Practice a safe command-line Compose workflow for the existing stack
 - [ ] Back up and restore persistent application volumes
+- [x] Configure Proxmox host to ignore lid-close events and verify headless reachability
+- [x] Add Pi-hole web-interface and DNS-port availability monitors in Uptime Kuma
 - [ ] Verify host and guest network configuration after a controlled reboot
 - [ ] Add backup and restore exercises
 
