@@ -104,7 +104,9 @@ proxmox-home-lab/
 - [Docker, Portainer, and monitoring deployment](docs/07-docker-portainer-and-monitoring.md)
 - [Docker administration and Compose fundamentals](docs/08-docker-administration-and-compose.md)
 - [Pi-hole DNS filtering and DHCP deployment](docs/09-pihole-dns-and-dhcp.md)
-- [Headless host operation and Pi-hole monitoring](docs/10-headless-host-and-pihole-monitoring.md)\n- [Proxmox address recovery and service restoration](docs/11-proxmox-address-recovery-and-service-restoration.md)
+- [Headless host operation and Pi-hole monitoring](docs/10-headless-host-and-pihole-monitoring.md)
+- [Proxmox address recovery and service restoration](docs/11-proxmox-address-recovery-and-service-restoration.md)
+- [Server backup and recovery lab](docs/12-server-backup-and-recovery.md)\n- [Proxmox address recovery and service restoration](docs/11-proxmox-address-recovery-and-service-restoration.md)
 - [Evidence guidance](evidence/README.md)
 - [Sanitized initial validation record](evidence/initial-validation.md)
 
@@ -193,7 +195,9 @@ See [APT repository configuration](docs/03-apt-repositories.md).
 - [ ] Verify additional clients use Pi-hole for DNS
 - [ ] Review IPv6 DNS behavior
 - [ ] Practice a safe command-line Compose workflow for the existing stack
-- [ ] Back up and restore persistent application volumes
+- [x] Create Docker service backups, verify SHA-256 checksums, and test archive extraction
+- [x] Schedule daily backups and configure 14-day retention
+- [ ] Perform a full service restore and configure off-host backups
 - [x] Configure Proxmox host to ignore lid-close events and verify headless reachability
 - [x] Add Pi-hole web-interface and DNS-port availability monitors in Uptime Kuma\n- [x] Restore Proxmox host management address after DHCP address change\n- [x] Configure Proxmox bridge with a static management address\n- [x] Restore Debian services VM and verify Docker container states\n- [ ] Exclude the Proxmox static address from Pi-hole DHCP pool or create a suitable reservation\n- [ ] Configure and verify automatic startup for the Debian services VM
 - [ ] Verify host and guest network configuration after a controlled reboot
