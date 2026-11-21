@@ -4,7 +4,7 @@ A documented home-lab project demonstrating the installation and initial configu
 
 The goal of this repository is to show practical infrastructure skills through repeatable documentation, command-line evidence, troubleshooting notes, and incremental lab expansion. It also demonstrates self-directed learning, initiative, resourcefulness, and the ability to investigate problems, verify results, and communicate technical work clearly.
 
-> **Project status:** Proxmox VE is installed and its wired network is working. A Debian 13 virtual machine is installed, reachable over SSH, and integrated with Proxmox through the QEMU Guest Agent. Docker Engine and Docker Compose are installed. Portainer Community Edition is deployed for container management, and Uptime Kuma is monitoring the Proxmox host, Debian guest, and Portainer endpoint. Pi-hole is now deployed for DNS filtering and DHCP. DNS blocking has been verified with direct queries, and a test phone has received a Pi-hole DHCP lease and generated queries visible in the Pi-hole Query Log. DNS verification for a second client remains in progress. Pi-hole web and DNS-port availability checks have also been added to Uptime Kuma.
+> **Project status:** Proxmox VE is installed and its wired network is working. A Debian 13 virtual machine is installed, reachable over SSH, and integrated with Proxmox through the QEMU Guest Agent. Docker Engine and Docker Compose are installed. Portainer Community Edition is deployed for container management, and Uptime Kuma is monitoring the Proxmox host, Debian guest, and Portainer endpoint. Pi-hole is now deployed for DNS filtering and DHCP. DNS blocking has been verified with direct queries, and a test phone has received a Pi-hole DHCP lease and generated queries visible in the Pi-hole Query Log. DNS verification for a second client remains in progress. Pi-hole web and DNS-port availability checks have also been added to Uptime Kuma. A DHCP-related Proxmox address change was troubleshot and the management host restored to its intended static address; guest services were brought back online.
 
 ## Skills demonstrated
 
@@ -53,7 +53,7 @@ The goal of this repository is to show practical infrastructure skills through r
 | Hypervisor base OS | Debian GNU/Linux 13 (Trixie) |
 | Management bridge | `vmbr0` |
 | Physical Ethernet interface | `nic0` |
-| Host addressing | DHCP |
+| Host addressing | Static IPv4 on `vmbr0` (DHCP exclusion/reservation follow-up pending) |
 | Management interface | Proxmox web UI, TCP port `8006` |
 | First guest | Debian GNU/Linux 13 (Trixie), VM ID 101 |
 | Guest hostname | `debian-services` |
@@ -104,7 +104,7 @@ proxmox-home-lab/
 - [Docker, Portainer, and monitoring deployment](docs/07-docker-portainer-and-monitoring.md)
 - [Docker administration and Compose fundamentals](docs/08-docker-administration-and-compose.md)
 - [Pi-hole DNS filtering and DHCP deployment](docs/09-pihole-dns-and-dhcp.md)
-- [Headless host operation and Pi-hole monitoring](docs/10-headless-host-and-pihole-monitoring.md)
+- [Headless host operation and Pi-hole monitoring](docs/10-headless-host-and-pihole-monitoring.md)\n- [Proxmox address recovery and service restoration](docs/11-proxmox-address-recovery-and-service-restoration.md)
 - [Evidence guidance](evidence/README.md)
 - [Sanitized initial validation record](evidence/initial-validation.md)
 
@@ -114,7 +114,7 @@ proxmox-home-lab/
 
 During network configuration, the host had an address on the LAN but initially did not show a default route. The route table later showed a default route through the LAN gateway and a connected route for the host's local subnet. Exact home-network addresses are intentionally omitted from this public repository. A sanitized example is provided in [initial validation evidence](evidence/initial-validation.md).
 
-### QEMU Guest Agent communication device
+### Proxmox management address recovery and guest service restoration\n\nThe Proxmox host's management bridge was found configured for DHCP and had acquired an unexpected address during DHCP changes. The bridge was changed to a static address through the Proxmox GUI, and connectivity was verified with ping. The Debian services VM was found stopped and started. Docker status confirmed Pi-hole and Uptime Kuma healthy and Portainer running; Portainer access was restored using its HTTPS published port 9443. DHCP pool protection and automatic guest startup remain follow-up tasks. See [address recovery and service restoration](docs/11-proxmox-address-recovery-and-service-restoration.md).\n\n### QEMU Guest Agent communication device
 
 The Debian guest initially did not contain `/dev/virtio-ports/`, so the QEMU Guest Agent service could not start because its required device dependency was unavailable. The VM's QEMU Guest Agent option was enabled in Proxmox and the VM was rebooted to apply the virtual hardware change.
 
@@ -195,7 +195,7 @@ See [APT repository configuration](docs/03-apt-repositories.md).
 - [ ] Practice a safe command-line Compose workflow for the existing stack
 - [ ] Back up and restore persistent application volumes
 - [x] Configure Proxmox host to ignore lid-close events and verify headless reachability
-- [x] Add Pi-hole web-interface and DNS-port availability monitors in Uptime Kuma
+- [x] Add Pi-hole web-interface and DNS-port availability monitors in Uptime Kuma\n- [x] Restore Proxmox host management address after DHCP address change\n- [x] Configure Proxmox bridge with a static management address\n- [x] Restore Debian services VM and verify Docker container states\n- [ ] Exclude the Proxmox static address from Pi-hole DHCP pool or create a suitable reservation\n- [ ] Configure and verify automatic startup for the Debian services VM
 - [ ] Verify host and guest network configuration after a controlled reboot
 - [ ] Add backup and restore exercises
 
