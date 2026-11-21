@@ -22,6 +22,12 @@ The goal of this repository is to show practical infrastructure skills through r
 - Managing Docker permissions and validating container execution
 - Deploying and managing containers through Portainer Community Edition
 - Using Docker Compose / Portainer Stacks
+- Installing and validating Netdata for host-level monitoring
+- Interpreting CPU, memory, disk, network, and pressure metrics
+- Reviewing alert rules and sustained-threshold behavior
+- Configuring Gmail SMTP relay with msmtp and TLS
+- Configuring Netdata email notification routing and service-account permissions
+- Testing notification delivery and observing a controlled CPU workload
 - Configuring persistent Docker volumes and published ports
 - Deploying Uptime Kuma and configuring infrastructure monitors
 - Inspecting Docker containers, images, volumes, and networks
@@ -197,6 +203,11 @@ See [APT repository configuration](docs/03-apt-repositories.md).
 - [ ] Practice a safe command-line Compose workflow for the existing stack
 - [x] Create Docker service backups, verify SHA-256 checksums, and test archive extraction
 - [x] Schedule daily backups and configure 14-day retention
+- [x] Install Netdata and verify host-level metrics collection
+- [x] Configure Gmail SMTP relay and Netdata email notification routing
+- [x] Verify Netdata test notifications arrive by email
+- [x] Observe a controlled CPU workload in the Netdata dashboard
+- [ ] Trigger a real Netdata alert and verify the resulting email notification
 - [ ] Perform a full service restore and configure off-host backups
 - [x] Configure Proxmox host to ignore lid-close events and verify headless reachability
 - [x] Add Pi-hole web-interface and DNS-port availability monitors in Uptime Kuma\n- [x] Restore Proxmox host management address after DHCP address change\n- [x] Configure Proxmox bridge with a static management address\n- [x] Restore Debian services VM and verify Docker container states\n- [ ] Exclude the Proxmox static address from Pi-hole DHCP pool or create a suitable reservation\n- [ ] Configure and verify automatic startup for the Debian services VM
