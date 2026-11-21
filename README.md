@@ -90,7 +90,9 @@ proxmox-home-lab/
 │   ├── 07-docker-portainer-and-monitoring.md
 │   ├── 08-docker-administration-and-compose.md
 │   ├── 09-pihole-dns-and-dhcp.md
-│   └── 10-headless-host-and-pihole-monitoring.md
+│   ├── 10-headless-host-and-pihole-monitoring.md
+│   ├── 12-server-backup-and-recovery.md
+│   └── 13-advanced-server-monitoring-and-alerting.md
 ├── evidence/
 │   ├── README.md
 │   ├── command-output-template.md
@@ -112,7 +114,8 @@ proxmox-home-lab/
 - [Pi-hole DNS filtering and DHCP deployment](docs/09-pihole-dns-and-dhcp.md)
 - [Headless host operation and Pi-hole monitoring](docs/10-headless-host-and-pihole-monitoring.md)
 - [Proxmox address recovery and service restoration](docs/11-proxmox-address-recovery-and-service-restoration.md)
-- [Server backup and recovery lab](docs/12-server-backup-and-recovery.md)\n- [Proxmox address recovery and service restoration](docs/11-proxmox-address-recovery-and-service-restoration.md)
+- [Server backup and recovery lab](docs/12-server-backup-and-recovery.md)
+- [Advanced server monitoring and alerting](docs/13-advanced-server-monitoring-and-alerting.md)\n- [Proxmox address recovery and service restoration](docs/11-proxmox-address-recovery-and-service-restoration.md)
 - [Evidence guidance](evidence/README.md)
 - [Sanitized initial validation record](evidence/initial-validation.md)
 
