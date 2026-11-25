@@ -8,28 +8,28 @@ This roadmap distinguishes completed work from planned exercises. Mark an item c
 - [x] Install the Debian amd64 netinst ISO in Proxmox storage.
 - [x] Create VM 101, `debian-services`.
 - [x] Allocate 2 vCPU, 2 GiB RAM, and a 32 GiB virtual disk.
-- [x] Connect the guest's VirtIO network adapter to `vmbr0).
+- [x] Connect the guest's VirtIO network adapter to `vmbr0`.
 - [x] Install Debian 13 without a desktop environment.
 - [x] Install the SSH server and connect remotely from another computer.
 - [x] Enable the Proxmox QEMU Guest Agent option and reboot the VM.
 - [x] Verify the VirtIO guest-agent port and running service.
 
-See [First Debian Virtual Machine](06-first-debian-vm.md) for configuration details and troubleshooting evidence.
+See [First Debian Virtual Machine](06-first-debian-vm.md) for configuration details and troubleshooting evidence. For later work (Docker, Portainer, Uptime Kuma, Pi-hole, backups, and monitoring), see the [project README](../README.md#current-completion-checklist).
 
 ## Immediate priorities
 
 - [ ] Confirm the guest's address and default route after a controlled reboot.
 - [ ] Complete and verify Debian package upgrades.
-- [ ] Install Docker Engine from the official Docker Debian repository.
-- [ ] Install the Docker Compose plugin.
-- [ ] Deploy Portainer Community Edition and verify browser access.
+- [x] Install Docker Engine from the official Docker Debian repository.
+- [x] Install the Docker Compose plugin.
+- [x] Deploy Portainer Community Edition and verify browser access.
 - [ ] Record the first application deployment and its network access.
 
 ## Network services
 
 Potential services to evaluate and deploy one at a time:
 
-- [ ] Uptime Kuma for service and host availability monitoring.
+- [x] Uptime Kuma for service and host availability monitoring.
 - [ ] AdGuard Home for DNS filtering (after planning DNS and recovery to avoid disrupting household connectivity).
 - [ ] Samba for controlled file sharing.
 - [ ] A self-hosted homepage/dashboard for lab services.
