@@ -59,6 +59,7 @@ The goal of this repository is to show practical infrastructure skills through r
 - Testing headless host operation and VM reachability with the lid closed
 - Monitoring Pi-hole web-interface and DNS-port availability with Uptime Kuma
 - Troubleshooting monitor targets and correcting a web-monitor port mismatch
+- Investigating Linux system logs, service state, disk and directory utilization, Docker/containerd storage, listening sockets, firewall policies, IPv6 routing, and HTTP application responses
 
 ## Environment
 
@@ -103,7 +104,8 @@ proxmox-home-lab/
 │   ├── 10-headless-host-and-pihole-monitoring.md
 │   ├── 11-proxmox-address-recovery-and-service-restoration.md
 │   ├── 12-server-backup-and-recovery.md
-│   └── 13-advanced-server-monitoring-and-alerting.md
+│   ├── 13-advanced-server-monitoring-and-alerting.md
+│   └── 14-day-4-linux-diagnostics-and-network-health.md
 ├── evidence/
 │   ├── README.md
 │   ├── command-output-template.md
@@ -127,6 +129,7 @@ proxmox-home-lab/
 - [Proxmox address recovery and service restoration](docs/11-proxmox-address-recovery-and-service-restoration.md)
 - [Server backup and recovery lab](docs/12-server-backup-and-recovery.md)
 - [Advanced server monitoring and alerting](docs/13-advanced-server-monitoring-and-alerting.md)
+- [Day 4 Linux diagnostics and network health assessment](docs/14-day-4-linux-diagnostics-and-network-health.md)
 - [Evidence guidance](evidence/README.md)
 - [Sanitized initial validation record](evidence/initial-validation.md)
 
@@ -155,6 +158,10 @@ The first `hello-world` image pull failed while resolving Docker's CloudFront do
 ### Uptime Kuma monitor target
 
 The Debian host monitor initially remained pending because its configured target address was incorrect. Correcting the target to the Debian VM's actual LAN address resolved the issue. This reinforced the importance of verifying monitor targets before changing host networking or firewall settings.
+
+### Day 4 Linux diagnostics and network health assessment
+
+Performed read-only troubleshooting across system logs, thermal sensor visibility in a virtual machine, disk and directory usage, Docker/containerd storage, systemd service health, listening sockets, IPv4/IPv6 firewall rules, IPv6 routing and outbound connectivity, and HTTP response behavior. Identified permissive default host inbound firewall policies and global IPv6 addressing as observations requiring upstream policy verification; external inbound reachability was not tested and no firewall changes were made. See [Day 4 diagnostics report](docs/14-day-4-linux-diagnostics-and-network-health.md).
 
 ### Pi-hole DNS and DHCP deployment
 
@@ -236,6 +243,7 @@ See [APT repository configuration](docs/03-apt-repositories.md).
 - [ ] Configure and verify automatic startup for the Debian services VM
 - [ ] Verify host and guest network configuration after a controlled reboot
 - [ ] Add backup and restore exercises
+- [x] Complete Day 4 Linux diagnostics: log review, sensor visibility, storage analysis, Docker accounting, service health, listening sockets, firewall inspection, IPv6 routing/connectivity, and HTTP tests
 
 ## Why this project matters
 
